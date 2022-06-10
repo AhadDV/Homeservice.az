@@ -129,6 +129,9 @@
   <data name="Curtain Washing" xml:space="preserve">
     <value>Pərdələrin yuyulması</value>
   </data>
+  <data name="Customer Reviews" xml:space="preserve">
+    <value>Müştəri Rəyləri</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -149,9 +152,6 @@
   </data>
   <data name="Message" xml:space="preserve">
     <value>Mesaj</value>
-  </data>
-  <data name="Müştəri Rəyləri" xml:space="preserve">
-    <value>Customer Reviews</value>
   </data>
   <data name="Office, Space cleaning" xml:space="preserve">
     <value>Ofis, Məkan təmizliyi</value>
