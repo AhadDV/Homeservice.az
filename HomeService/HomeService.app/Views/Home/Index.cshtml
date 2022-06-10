@@ -275,7 +275,7 @@
             @foreach (var item in Model.Costs.Items)
             {
                 <div class="col-lg-4 col-md-6 col-sm-10">
-                    <div class="single-pricing wow fadeInUp @(Model.Costs.Items.Count>0&& Model.Costs.Items[0]==item?"active":"first-item")" data-wow-delay=".15s">
+                    <div class="single-pricing wow fadeInUp @(Model.Costs.Items.Count>=2&& Model.Costs.Items[1]==item?"active":"first-item")" data-wow-delay=".15s">
                         <div class="pricing-header">
                             <h4>
                                 @if ((localizaer["Language"] == "Az"))
