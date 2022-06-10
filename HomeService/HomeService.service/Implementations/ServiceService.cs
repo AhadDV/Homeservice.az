@@ -2,6 +2,7 @@
 using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.ServiceDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,10 @@ namespace HomeService.service.Implementations
         public async Task<ServicegetDto> Get(int id)
         {
             Service service = await _unitOfWork.ServiceRepository.GetAsync(x => x.Id == id, "ServiceLanguages.Language");
+
+            if (service == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             ServicegetDto serviceget = new ServicegetDto
             {
                 Icon = service.Icon,
@@ -91,6 +96,10 @@ namespace HomeService.service.Implementations
         public async Task RemoveAync(int id)
         {
             Service service = await _unitOfWork.ServiceRepository.GetAsync(x => x.Id == id, "ServiceLanguages.Language");
+
+            if (service == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             _unitOfWork.ServiceRepository.Remove(service);
             await _unitOfWork.CommitAsync();
 
@@ -99,7 +108,9 @@ namespace HomeService.service.Implementations
         public async Task Update(int id, ServicePostDto servicePostDto)
         {
             Service service = await _unitOfWork.ServiceRepository.GetAsync(x => x.Id == id, "ServiceLanguages.Language");
-            
+
+            if (service == null)
+                throw new ItemNotFoundExeption("Item is not found");
 
             List<ServiceLanguage> RemovableLanguages = service.ServiceLanguages.Where(x => x.ServiceId == id).ToList();
 

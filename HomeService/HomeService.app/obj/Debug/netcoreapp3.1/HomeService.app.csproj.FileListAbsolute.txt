@@ -410,3 +410,8 @@ C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreap
 C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\HomeService.app.dll
 C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\HomeService.app.pdb
 C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\HomeService.app.genruntimeconfig.cache
+C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Blogs.cshtml.g.cs
+C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Views\Blog\Details.cshtml.g.cs
+C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Blog\Create.cshtml.g.cs
+C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Blog\Index.cshtml.g.cs
+C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Blog\Update.cshtml.g.cs

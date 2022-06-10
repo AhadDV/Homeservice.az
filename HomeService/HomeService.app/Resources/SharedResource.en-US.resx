@@ -129,6 +129,9 @@
   <data name="Curtain Washing" xml:space="preserve">
     <value>Curtain Washing</value>
   </data>
+  <data name="Customer Reviews" xml:space="preserve">
+    <value>Customer Reviews</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Read More" xml:space="preserve">
     <value>Read More</value>
+  </data>
+  <data name="See all news" xml:space="preserve">
+    <value>See all news</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Services</value>

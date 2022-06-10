@@ -2,6 +2,7 @@
 using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.PositionDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -51,6 +52,9 @@ namespace HomeService.service.Implementations
         {
             Position position = await _unitOfWork.PositionRepository.GetAsync(x => x.Id == id,  "PositionLanguages.Language");
 
+            if (position == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             PositionGetDto positionGetDto = new PositionGetDto
             {
                 Id = position.Id,
@@ -84,6 +88,10 @@ namespace HomeService.service.Implementations
         public async Task RemoveAync(int id)
         {
             Position position = await _unitOfWork.PositionRepository.GetAsync(x => x.Id == id, "PositionLanguages.Language");
+
+            if (position == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             _unitOfWork.PositionRepository.Remove(position);
             await _unitOfWork.CommitAsync();
 
@@ -93,6 +101,8 @@ namespace HomeService.service.Implementations
         {
             Position position = await _unitOfWork.PositionRepository.GetAsync(x => x.Id == id,  "PositionLanguages.Language");
 
+            if (position == null)
+                throw new ItemNotFoundExeption("Item is not found");
 
             List<PositionLanguage> RemovableLanguages = position.PositionLanguages.Where(x => x.PositionId == id).ToList();
 

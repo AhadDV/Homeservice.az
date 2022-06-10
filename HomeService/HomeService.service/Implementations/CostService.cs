@@ -3,6 +3,7 @@ using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.CommentDto;
 using HomeService.service.Dtos.CostDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,9 @@ namespace HomeService.service.Implementations
         {
             Cost cost = await _unitOfWork.CostRespository.GetAsync(x => x.Id == id, "Skills", "CostLanguages.Language");
 
+            if (cost == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             CostGetDto costGetDto = new CostGetDto
             {
                 Id = cost.Id,
@@ -110,6 +114,12 @@ namespace HomeService.service.Implementations
         public async Task RemoveAync(int id)
         {
             Cost cost = await _unitOfWork.CostRespository.GetAsync(x => x.Id == id, "Skills", "CostLanguages.Language");
+
+            if (cost == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
+
+
             _unitOfWork.CostRespository.Remove(cost);
             await _unitOfWork.CommitAsync();
 
@@ -119,6 +129,8 @@ namespace HomeService.service.Implementations
         {
             Cost cost = await _unitOfWork.CostRespository.GetAsync(x => x.Id == id, "Skills", "CostLanguages.Language");
 
+            if (cost == null)
+                throw new ItemNotFoundExeption("Item is not found");
 
             List<CostLanguage> RemovableLanguages = cost.CostLanguages.Where(x => x.CostId == id).ToList();
 

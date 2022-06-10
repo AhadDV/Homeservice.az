@@ -129,6 +129,9 @@
   <data name="Curtain Washing" xml:space="preserve">
     <value>Стирка штор</value>
   </data>
+  <data name="Customer Reviews" xml:space="preserve">
+    <value>Отзывы клиентов</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Эл. адрес</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Read More" xml:space="preserve">
     <value>Читать далее</value>
+  </data>
+  <data name="See all news" xml:space="preserve">
+    <value>Посмотреть все новости</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>обслуживание</value>

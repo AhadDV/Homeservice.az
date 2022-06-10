@@ -3,6 +3,7 @@ using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.CommentDto;
 using HomeService.service.Dtos.ServiceDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,10 @@ namespace HomeService.service.Implementations
         public async Task<CommentGetDto> Get(int id)
         {
             Comment comment = await _unitOfWork.CommentRepository.GetAsync(x => x.Id == id, "CommentLanguages.Language");
+
+            if (comment == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             CommentGetDto commentGetDto = new CommentGetDto
             {
                 Id = comment.Id,
@@ -87,6 +92,11 @@ namespace HomeService.service.Implementations
         public async Task RemoveAync(int id)
         {
             Comment comment = await _unitOfWork.CommentRepository.GetAsync(x => x.Id == id, "CommentLanguages");
+
+            if (comment == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
+
             _unitOfWork.CommentRepository.Remove(comment);
             await _unitOfWork.CommitAsync();
 
@@ -96,6 +106,8 @@ namespace HomeService.service.Implementations
         {
             Comment comment = await _unitOfWork.CommentRepository.GetAsync(x => x.Id == id, "CommentLanguages");
 
+            if (comment == null)
+                throw new ItemNotFoundExeption("Item is not found");
 
             List<CommentLanguage> RemovableLanguages = comment.CommentLanguages.Where(x => x.CommentId == id).ToList();
 

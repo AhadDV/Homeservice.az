@@ -2,6 +2,7 @@
 using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.QuestionDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -51,6 +52,10 @@ namespace HomeService.service.Implementations
         public async Task<QuestionGetDto> Get(int id)
         {
             Questions questions = await _unitOfWork.QuestionRepository.GetAsync(x => x.Id == id, "QuestionLanguages.Language");
+
+            if (questions == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             QuestionGetDto questionGet = new QuestionGetDto()
             {
 
@@ -89,6 +94,10 @@ namespace HomeService.service.Implementations
         public async Task RemoveAync(int id)
         {
             Questions questions = await _unitOfWork.QuestionRepository.GetAsync(x => x.Id == id, "QuestionLanguages.Language");
+
+            if (questions == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             _unitOfWork.QuestionRepository.Remove(questions);
             await _unitOfWork.CommitAsync();
 
@@ -98,6 +107,8 @@ namespace HomeService.service.Implementations
         {
             Questions questions = await _unitOfWork.QuestionRepository.GetAsync(x => x.Id == id, "QuestionLanguages.Language");
 
+            if (questions == null)
+                throw new ItemNotFoundExeption("Item is not found");
 
             List<QuestionLanguage> RemovableLanguages = questions.QuestionLanguages.Where(x => x.QuestionId == id).ToList();
 

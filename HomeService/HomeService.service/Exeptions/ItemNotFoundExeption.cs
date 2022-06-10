@@ -4,9 +4,9 @@ using System.Text;
 
 namespace HomeService.service.Exeptions
 {
-   public class ExeptionItemNotFound:Exception
+   public class ItemNotFoundExeption:Exception
     {
-        public ExeptionItemNotFound(string msg):base(msg)
+        public ItemNotFoundExeption(string msg):base(msg)
         {
 
         }

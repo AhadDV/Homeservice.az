@@ -3,6 +3,7 @@ using HomeService.core;
 using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.LanguageDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Extentions;
 using HomeService.service.Interfaces;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,10 @@ namespace HomeService.service.Implementations
         public async Task<SettingGetDto> GetByIdAsync(int id)
         {
             Setting setting = await _unitOfWork.SettingRepository.GetAsync(x => x.Id == id, "SocialLinks", "LanguageSettings.Language");
+
+            if (setting == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             SettingGetDto getDto = _mapper.Map<SettingGetDto>(setting);
             getDto.IntroTitleAz = setting.LanguageSettings.FirstOrDefault(x => x.Language.Key == "IntroTitleAz").Language.Text;
             getDto.IntroTitleEn = setting.LanguageSettings.FirstOrDefault(x => x.Language.Key == "IntroTitleEn").Language.Text;
@@ -57,6 +62,10 @@ namespace HomeService.service.Implementations
         public async Task Update(int id, SettingPostDto settingPostDto)
         {
             Setting setting = await _unitOfWork.SettingRepository.GetAsync(x => x.Id == id, "SocialLinks", "LanguageSettings.Language");
+            if (setting == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
+
             setting.Adress = settingPostDto.Adress;
             setting.CellPhone = settingPostDto.CellPhone;
             setting.HomePhone = settingPostDto.HomePhone;

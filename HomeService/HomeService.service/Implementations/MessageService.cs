@@ -3,6 +3,7 @@ using HomeService.core;
 using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.MessageDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,9 @@ namespace HomeService.service.Implementations
         {
             Message message = await _unitOfWork.MessageRepository.GetAsync(x => x.Id == id);
 
+            if (message == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             MessageGetDto GetDto = _mapper.Map<MessageGetDto>(message);
             return GetDto;
         }
@@ -51,7 +55,10 @@ namespace HomeService.service.Implementations
         {
             Message message = await _unitOfWork.MessageRepository.GetAsync(x => x.Id == id);
 
-             _unitOfWork.MessageRepository.Remove(message);
+            if (message == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
+            _unitOfWork.MessageRepository.Remove(message);
 
             await _unitOfWork.CommitAsync();
         }

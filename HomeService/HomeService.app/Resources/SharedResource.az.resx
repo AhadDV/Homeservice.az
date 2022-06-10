@@ -150,6 +150,9 @@
   <data name="Message" xml:space="preserve">
     <value>Mesaj</value>
   </data>
+  <data name="Müştəri Rəyləri" xml:space="preserve">
+    <value>Customer Reviews</value>
+  </data>
   <data name="Office, Space cleaning" xml:space="preserve">
     <value>Ofis, Məkan təmizliyi</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Read More" xml:space="preserve">
     <value>Daha Çox</value>
+  </data>
+  <data name="See all news" xml:space="preserve">
+    <value>Bütün xəbərlərə bax</value>
   </data>
   <data name="Services" xml:space="preserve">
     <value>Xidmətlər</value>

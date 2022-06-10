@@ -1,5 +1,6 @@
 using Beacon.app.Resources;
 using FluentValidation.AspNetCore;
+using HomeService.app.ServiceException;
 using HomeService.core;
 using HomeService.core.Models;
 using HomeService.data;
@@ -136,7 +137,7 @@ namespace HomeService.app
                 app.UseHsts();
             }
 
-           
+            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

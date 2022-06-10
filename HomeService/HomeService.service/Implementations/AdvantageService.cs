@@ -2,6 +2,7 @@
 using HomeService.core.Models;
 using HomeService.service.Dtos;
 using HomeService.service.Dtos.AdvantageDto;
+using HomeService.service.Exeptions;
 using HomeService.service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,11 @@ namespace HomeService.service.Implementations
         public async Task<AdvantageGetDto> Get(int id)
         {
             Advantage advantage = await _unitOfWork.AdvantageRepository.GetAsync(x => x.Id == id, "LanguageAdnvantage.Language");
+
+            if(advantage==null)
+                throw new ItemNotFoundExeption("Item is not found");
+
+
             AdvantageGetDto advantageGet = new AdvantageGetDto
             {
                 Icon = advantage.Icon,
@@ -84,6 +90,10 @@ namespace HomeService.service.Implementations
         public async Task RemoveAync(int id)
         {
             Advantage advantage = await _unitOfWork.AdvantageRepository.GetAsync(x => x.Id == id, "LanguageAdnvantage");
+
+            if(advantage == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
             _unitOfWork.AdvantageRepository.Remove(advantage);
             await _unitOfWork.CommitAsync();
             
@@ -92,6 +102,11 @@ namespace HomeService.service.Implementations
         public async Task Update(int id, AdvantagePostDto advantagePostDto)
         {
             Advantage advantage = await _unitOfWork.AdvantageRepository.GetAsync(x => x.Id == id, "LanguageAdnvantage.Language");
+
+            if(advantage == null)
+                throw new ItemNotFoundExeption("Item is not found");
+
+
             advantage.Icon = advantagePostDto.Icon;
 
             List<LanguageAdnvantage> RemovableLanguages = advantage.LanguageAdnvantage.Where(x => x.AdvantageId == id).ToList();
