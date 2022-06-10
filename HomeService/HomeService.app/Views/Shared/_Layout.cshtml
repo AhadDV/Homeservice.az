@@ -1,0 +1,166 @@
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<SharedResource> localizer
+@inject HomeService.service.Interfaces.ISettingService settingService
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home-Service.com</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="~/assets/images/favicon.png" type="image/png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/assets/css/animate.css" />
+    <link rel="stylesheet" href="~/assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="~/assets/css/lineicons.css" />
+    <link rel="stylesheet" href="~/assets/css/styles.css" />
+   
+    @RenderSection("Css",false)
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="navbar-wrapper">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="№">
+                                <img src="~/design/@settingService.GetSetting().Result.Logo" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler">
+                                <span class="toggler-icon"> </span>
+                                <span class="toggler-icon"> </span>
+                                <span class="toggler-icon"> </span>
+                            </button>
+                            <div class="navbar-collapse">
+                                <ul id="nav" class="navbar-nav ms-auto">
+                                    <li class="nav-item">
+                                        <a class="menu-scroll" href="#home">@localizer["Home"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="menu-scroll" href="#features">@localizer["Our advantages"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="menu-scroll" href="#about">@localizer["About"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="menu-scroll" href="#services">@localizer["Services"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="menu-scroll" href="#blog">@localizer["Blog"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="menu-scroll" href="#contact">@localizer["Contact Us"]</a>
+                                    </li>
+                                    <li id="languageId" class="nav-item">
+                                        <a class="menu-scroll"><i class="fa-solid fa-earth-africa"></i></a>
+                                        <div id="dropdown">
+                                            <p><a style="color:gray" asp-controller="home" asp-action="ChangeLanguage" asp-route-culture="en-US">En</a></p>
+                                            <p><a style="color:gray" asp-controller="home" asp-action="ChangeLanguage" asp-route-culture="az-AZ">az</a></p>
+                                            <p><a style="color:gray" asp-controller="home" asp-action="ChangeLanguage" asp-route-culture="ru-RU">ru</a></p>
+                                        </div>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @RenderBody()
+
+
+    <footer class="footer wow fadeInUp" data-wow-delay=".15s">
+        <div class="footer-widgets">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="widget">
+                            <a href="index-2.html" class="footer-logo">
+                                <img src="~/design/logoLight.png" alt="logo" />
+                            </a>
+                            <p class="widget-desc">
+                                Təmizlik sahəsində <br> Azərbaycanın ən yaxşısı.
+                            </p>
+                            <ul class="widget-socials">
+                                @foreach (var item in settingService.GetByIdAsync(1).Result.SocialLinks)
+                                {
+                                    <li>
+                                        <a href="@item.SocialLinks">
+                                            @Html.Raw(item.SocialIcons)
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="widget">
+                            <h5 class="widget-title">Linklər</h5>
+                            <ul class="widget-links">
+                                <li>
+                                    <a href="#">@localizer["Home"]</a>
+                                </li>
+                                <li>
+                                    <a href="#features">@localizer["Our advantages"]ər</a>
+                                </li>
+                                <li>
+                                    <a href="#about">@localizer["About"]</a>
+                                </li>
+                                <li>
+                                    <a href="#pricing">@localizer["Price"]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="widget">
+                            <h5 class="widget-title">@localizer["Services"]</h5>
+                            <ul class="widget-links">
+                                <li>
+                                    <a href="#services">@localizer["Curtain Washing"]</a>
+                                </li>
+                                <li>
+                                    <a href="#services">@localizer["Facade Cleaning"]"</a>
+                                </li>
+                                <li>
+                                    <a href="#services">@localizer["House Cleaning"] </a>
+                                </li>
+                                <li>
+                                    <a href="#services">@localizer["Office, Space cleaning"]</a>
+                                </li>
+                                <li>
+                                    <a href="#services">@localizer["Pool Cleaning"]</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <a href="javascript:void(0)" class="back-to-top">
+        <i class="lni lni-chevron-up"> </i>
+    </a>
+
+
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/glightbox.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    @RenderSection("script", required: false);
+</body>
+
+
+</html>
