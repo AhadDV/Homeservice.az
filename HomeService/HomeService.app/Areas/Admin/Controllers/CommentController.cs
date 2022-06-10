@@ -35,6 +35,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CommentVm commentVm)
         {
             if (commentVm.CommentPostDto.Texts.Any(x => string.IsNullOrWhiteSpace(x)) || commentVm.CommentPostDto.Keys.Any(x => string.IsNullOrWhiteSpace(x)))
@@ -59,6 +60,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, CommentVm commentVm)
         {
             CommentVm comment = new CommentVm

@@ -40,6 +40,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TeamVM teamVM)
         {
             ViewBag.Positions = await _positionService.GetAll();
@@ -59,6 +60,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, TeamVM teamVm)
         {
             ViewBag.Positions = await _positionService.GetAll();

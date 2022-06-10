@@ -36,6 +36,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ServiceVM serviceVM)
         {
             await _serviceService.CreateAsync(serviceVM.ServicePostDto);

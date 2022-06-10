@@ -37,6 +37,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, SettingVM settingVM)
         {
             SettingVM setting = new SettingVM

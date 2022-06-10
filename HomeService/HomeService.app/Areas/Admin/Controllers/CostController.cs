@@ -36,6 +36,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CostVM costVM)
         {
             await _costservice.CreateAsync(costVM.CostPostDto);
@@ -53,6 +54,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, CostVM costVM)
         {
             await _costservice.Update(id, costVM.CostPostDto);

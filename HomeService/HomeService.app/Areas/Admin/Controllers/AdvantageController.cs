@@ -36,6 +36,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AdvantagesVM advantagesVM)
         {
             await _advantageService.CreateAsync(advantagesVM.AdvantagePostDto);
@@ -52,6 +53,7 @@ namespace HomeService.app.Areas.Admin.Controllers
             return View(advantagesVM);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Update(int id,AdvantagesVM advantagesVM)
         {

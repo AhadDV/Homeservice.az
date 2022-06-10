@@ -37,6 +37,7 @@ namespace HomeService.app.Areas.Admin.Controllers
             }
 
             [HttpPost]
+            [ValidateAntiForgeryToken]
             public async Task<IActionResult> Create(BLogVM bLogVM)
             {
             ViewBag.Positions = await _positionService.GetAll();
@@ -56,6 +57,7 @@ namespace HomeService.app.Areas.Admin.Controllers
             }
 
             [HttpPost]
+            [ValidateAntiForgeryToken]
             public async Task<IActionResult> Update(int id, BLogVM bLogVM)
             {
                 ViewBag.Positions = await _positionService.GetAll();

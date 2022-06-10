@@ -1,5 +1,6 @@
 ﻿using HomeService.app.ViewModel;
 using HomeService.core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,11 +24,19 @@ namespace HomeService.app.Areas.Admin.Controllers
             this.roleManager = roleManager;
         }
 
+        [Authorize(Roles = "Admin")]
+        public async Task< IActionResult> Index()
+        {
+            List<AppUser> users =  _userManager.Users.ToList();
+            return View(users);
+        }
+
         public IActionResult Login()
         {
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginVM loginvm)
         {
             if (loginvm.UserName==null||loginvm.Password==null)
@@ -51,7 +60,7 @@ namespace HomeService.app.Areas.Admin.Controllers
                 return View();
             }
 
-            return RedirectToAction("index", "setting");
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Logout()
@@ -60,16 +69,31 @@ namespace HomeService.app.Areas.Admin.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-     
         public async Task<IActionResult> AdminCreate()
         {
+
+            return View();
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdminCreate(LoginVM loginVM)
+        {
+            if (loginVM.UserName == null||loginVM.Password==null)
+            {
+                ModelState.AddModelError("", "Xanaları düzgün doldurun");
+                return View();
+            }
+           
+           
             AppUser appuser = new AppUser
             {
-                UserName = "Admin",
-
+              UserName=loginVM.UserName
             };
 
-            IdentityResult result = await _userManager.CreateAsync(appuser, "Admin123@");
+            IdentityResult result = await _userManager.CreateAsync(appuser, loginVM.Password);
 
             if (!result.Succeeded)
             {
@@ -80,10 +104,17 @@ namespace HomeService.app.Areas.Admin.Controllers
                 return View();
             }
             await _userManager.AddToRoleAsync(appuser, "Admin");
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Remove(string id)
+        {
+            AppUser user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound();
 
-            return Ok();
+            await _userManager.DeleteAsync(user);
+            return RedirectToAction(nameof(Index));
         }
 
-   
     }
 }

@@ -415,3 +415,4 @@ C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreap
 C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Blog\Create.cshtml.g.cs
 C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Blog\Index.cshtml.g.cs
 C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Blog\Update.cshtml.g.cs
+C:\Users\HP\Desktop\HomeService2\HomeService\HomeService.app\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Index.cshtml.g.cs

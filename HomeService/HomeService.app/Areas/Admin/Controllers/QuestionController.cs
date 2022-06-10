@@ -35,6 +35,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(QuestionVM questionVM)
         {
          
@@ -53,6 +54,7 @@ namespace HomeService.app.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, QuestionVM questionVM)
         {
             await _questionService.Update(id, questionVM.QuestionPostDto);
